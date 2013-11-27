@@ -12,12 +12,12 @@ public class Main {
 	public void doWekaOperations() {
 		WekaOperations w = new WekaOperations();
 //		w.classifyJ48Tree();
-//		w.classifyGeneticProgrammingFunction();
+		w.classifyGeneticProgrammingFunction();
 //		w.classifySVM();
 //		w.classifyNaiveBayes();
 //		w.classifyAll();
 //		w.classifyAllV2();
-		w.classifyAllV3WithMultipleRuns();
+//		w.classifyAllV3WithMultipleRuns();
 //		w.classifyIBkV2();
 	}
 	

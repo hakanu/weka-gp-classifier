@@ -5,10 +5,10 @@ import weka.core.Instances;
 
 public class WekaOperations {
 	private final String[] fileNames = {
-			"dataset/adult.data_normalized.arff",
+//			"dataset/adult.data_normalized.arff",
 //			"dataset/breast-cancer-wisconsin_normalized.arff",
 //			"dataset/car.data.arff",
-//			"dataset/iris.arff",
+			"dataset/iris.arff",
 //			"dataset/ext/contact-lenses.arff",
 //			"dataset/ext/cpu.arff",
 //			"dataset/ext/cpu.with.vendor.arff",
@@ -35,7 +35,7 @@ public class WekaOperations {
 		data.setClassIndex(data.numAttributes() - 1);
 		StringBuilder outputLog = new StringBuilder();
 		outputLog.append(WekaUtils.evaluateCrossValidate(data,
-			WekaUtils.buildJ48TreeClassifier(data)));
+				WekaUtils.buildClassifier(data, "J48")));
 		System.out.println(outputLog);
 	}
 	
@@ -44,7 +44,7 @@ public class WekaOperations {
 		data.setClassIndex(data.numAttributes() - 1);
 		StringBuilder outputLog = new StringBuilder();
 		outputLog.append(WekaUtils.evaluateCrossValidate(data,
-			WekaUtils.buildNaiveBayesClassifier(data)));
+				WekaUtils.buildClassifier(data, "NaiveBayes")));
 		System.out.println(outputLog);
 	}
 	
@@ -53,7 +53,7 @@ public class WekaOperations {
 		data.setClassIndex(data.numAttributes() - 1);
 		StringBuilder outputLog = new StringBuilder();
 		outputLog.append(WekaUtils.evaluateCrossValidate(data,
-			WekaUtils.buildGeneticProgrammingFunctionClassifier(data)));
+				WekaUtils.buildClassifier(data, "GeneticProgramming")));
 		System.out.println(outputLog);
 	}
 	
@@ -61,51 +61,9 @@ public class WekaOperations {
 		Instances data = WekaUtils.readArffFile(fileNames[1]);
 		data.setClassIndex(data.numAttributes() - 1);
 		StringBuilder outputLog = new StringBuilder();
-		//outputLog.append(WekaUtils.evaluateCrossValidate(data,
-		//	WekaUtils.buildSVMClassifier(data)));
 		outputLog.append(WekaUtils.evaluateCrossValidate(data,
-				WekaUtils.buildSVMClassifier(data)));
+				WekaUtils.buildClassifier(data, "SVM")));
 		System.out.println(outputLog);
-	}
-	
-	public void classifyAll() {
-		StringBuilder outputLog = new StringBuilder();
-		for (int i = 0; i < fileNames.length; i++) {
-			Instances data = WekaUtils.readArffFile(fileNames[i]);
-			data.setClassIndex(data.numAttributes() - 1);
-			
-			outputLog.append(WekaUtils.evaluateCrossValidate(
-					data, WekaUtils.buildJ48TreeClassifier(data)));
-			System.out.println("----------------------------------------");
-			
-			outputLog.append(WekaUtils.evaluateCrossValidate(
-					data, WekaUtils.buildRandomForestClassifier(data)));
-			System.out.println("----------------------------------------");
-			
-			//outputLog.append(WekaUtils.evaluateCrossValidate(data,
-			//		WekaUtils.buildId3TreeClassifier(data)));
-			//System.out.println("----------------------------------------");
-			
-			outputLog.append(WekaUtils.evaluateCrossValidate(
-					data, WekaUtils.buildIBkClassifier(data)));
-			System.out.println("----------------------------------------");
-			
-			outputLog.append(WekaUtils.evaluateCrossValidate(
-					data, WekaUtils.buildNaiveBayesClassifier(data)));
-			System.out.println("----------------------------------------");
-			
-			outputLog.append(WekaUtils.evaluateCrossValidate(
-					data, WekaUtils.buildGeneticProgrammingFunctionClassifier(
-							data)));
-			System.out.println("----------------------------------------");
-			
-			outputLog.append(WekaUtils.evaluateCrossValidate(
-					data, WekaUtils.buildSVMClassifier(data)));
-			System.out.println("----------------------------------------");
-			System.out.println(outputLog.toString());
-			System.out.println("++++++++++++++++++++++++++++++++++++++++++");
-		}
-		WekaUtils.createSummary(outputLog, false);
 	}
 	
 	public void classifyIBkV2() {

@@ -87,205 +87,6 @@ public class WekaUtils {
 		System.out.println("Finished reading arff file...\n\n");
 		return null;
 	}
-
-	public static J48 buildJ48TreeClassifier(Instances data) {
-		currentAlg = "J48";
-		System.out.println("Running " + currentAlg + " tree classifier...");
-		String[] options = new String[4];
-		options[0] = "-C";
-		options[1] = "0.25";
-		options[2] = "-M";
-		options[3] = "2";
-		J48 tree = new J48();
-		try {
-			long classifierBuildStartTime = System.nanoTime();
-			tree.setOptions(options);     // set the options
-			tree.buildClassifier(data);
-			long classifierBuildEndTime = System.nanoTime();
-			double classifierBuildElapsedTime = (
-					(classifierBuildEndTime - classifierBuildStartTime) /
-					 1000000000.0);
-			WekaUtils.classifierBuildElapsedTime = classifierBuildElapsedTime;
-			System.out.println("+++++Classifier building ended in " +
-							   classifierBuildElapsedTime + " seconds");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}   // build classifier
-		System.out.println(currentAlg + " classifier finished.\n\n");
-		return tree;
-	}
-	
-	public static NaiveBayes buildNaiveBayesClassifier(Instances data) {
-		currentAlg = "NaiveBayes";
-		System.out.println("Running " + currentAlg + " tree classifier...");
-		String[] options = new String[4];
-		NaiveBayes tree = new NaiveBayes();
-		try {
-			long classifierBuildStartTime = System.nanoTime();
-//			tree.setOptions(options);     // set the options
-			tree.buildClassifier(data);
-			long classifierBuildEndTime = System.nanoTime();
-			double classifierBuildElapsedTime = (
-					(classifierBuildEndTime - classifierBuildStartTime) /
-					 1000000000.0);
-			WekaUtils.classifierBuildElapsedTime = classifierBuildElapsedTime;
-			System.out.println("+++++Classifier building ended in " +
-							   classifierBuildElapsedTime + " seconds");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}   // build classifier
-		System.out.println(currentAlg + " classifier finished.\n\n");
-		return tree;
-	}
-
-	public static WLSVM buildSVMClassifier(Instances data) {
-		currentAlg = "WLSVM";
-		System.out.println("Running "+ currentAlg + " function classifier...");
-		String dataFile = "";
-		String[] options = {
-				new String("-t"),
-				dataFile,
-				new String("-x"),		// 5 folds CV
-				new String("5"),
-				new String("-i"),		//
-				//---------------
-				new String("-S"),		// WLSVM options
-				new String("0"),		// Classification problem
-				new String("-K"),       // RBF kernel
-				new String("2"),
-				new String("-G"),       // gamma
-				new String("1"),
-				new String("-C"),       // C
-				new String("7"),
-				new String("-Z"),       // normalize input data
-				new String("1"),
-				new String("-M"),       // cache size in MB
-				new String("100")				
-				};
-		WLSVM svmFunc = new WLSVM();
-		try {
-			long classifierBuildStartTime = System.nanoTime();
-			//System.out.println(Evaluation.evaluateModel(lib,options));
-//			svmFunc.setOptions(options);     // set the options
-			svmFunc.buildClassifier(data);
-			long classifierBuildEndTime = System.nanoTime();
-			double classifierBuildElapsedTime = (
-					(classifierBuildEndTime - classifierBuildStartTime) /
-					 1000000000.0);
-			WekaUtils.classifierBuildElapsedTime = classifierBuildElapsedTime;
-			System.out.println("+++++Classifier building ended in " +
-							   classifierBuildElapsedTime + " seconds");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return svmFunc;
-	}
-	
-	public static GeneticProgramming buildGeneticProgrammingFunctionClassifier(
-			Instances data) {
-		currentAlg = "GeneticProgramming";
-		System.out.println("Running "+ currentAlg + " function classifier...");
-		String[] options = new String[4];
-		GeneticProgramming gpFunc = new GeneticProgramming();
-		System.out.println("Created gp classifier object.");
-		try {
-			long classifierBuildStartTime = System.nanoTime();
-//			gpFunc.setOptions(options);     // set the options
-			gpFunc.buildClassifier(data);
-			long classifierBuildEndTime = System.nanoTime();
-			double classifierBuildElapsedTime = (
-					(classifierBuildEndTime - classifierBuildStartTime) /
-					 1000000000.0);
-			WekaUtils.classifierBuildElapsedTime = classifierBuildElapsedTime;
-			System.out.println("+++++Classifier building ended in " +
-							   classifierBuildElapsedTime + " seconds");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}   // build classifier
-		System.out.println(currentAlg + " classifier finished.\n\n");
-		return gpFunc;
-	}
-	
-	public static RandomForest buildRandomForestClassifier(Instances data) {
-		currentAlg = "RandomForest";
-		System.out.println("Running " + currentAlg + " tree classifier...");
-		String[] options = new String[6];
-		options[0] = "-I";
-		options[1] = "10";
-		options[2] = "-K";
-		options[3] = "0";
-		options[4] = "-S";
-		options[5] = "1";
-		RandomForest tree = new RandomForest();
-		try {
-			long classifierBuildStartTime = System.nanoTime();
-			tree.setOptions(options);     // set the options
-			tree.buildClassifier(data);
-			long classifierBuildEndTime = System.nanoTime();
-			double classifierBuildElapsedTime = (
-					(classifierBuildEndTime - classifierBuildStartTime) /
-					 1000000000.0);
-			WekaUtils.classifierBuildElapsedTime = classifierBuildElapsedTime;
-			System.out.println("+++++Classifier building ended in " +
-							   classifierBuildElapsedTime + " seconds");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		System.out.println(currentAlg + " tree classifier finished.\n\n");
-		return tree;
-	}
-	
-	public static Id3 buildId3TreeClassifier(Instances data) {
-		currentAlg = "Id3";
-		System.out.println("\n\nRunning " + currentAlg + " tree classifier...");
-		String[] options = new String[6];
-		options[0] = "-I";
-		options[1] = "10";
-		options[2] = "-K";
-		options[3] = "0";
-		options[4] = "-S";
-		options[5] = "1";
-		Id3 tree = new Id3();
-		try {
-			long classifierBuildStartTime = System.nanoTime();
-//			tree.setOptions(options);     // set the options
-			tree.buildClassifier(data);
-			long classifierBuildEndTime = System.nanoTime();
-			double classifierBuildElapsedTime = (
-					(classifierBuildEndTime - classifierBuildStartTime) /
-					 1000000000.0);
-			WekaUtils.classifierBuildElapsedTime = classifierBuildElapsedTime;
-			System.out.println("+++++Classifier building ended in " +
-							   classifierBuildElapsedTime + " seconds");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		System.out.println(currentAlg + " tree classifier finished.\n\n");
-		return tree;
-	}
-	
-	public static IBk buildIBkClassifier(Instances data) {
-		currentAlg = "IBk";
-		System.out.println("Running IBk " + currentAlg + " lazy classifier...");
-		String[] options = new String[1];
-		IBk ibk = new IBk();
-		try {
-			long classifierBuildStartTime = System.nanoTime();
-//			ibk.setOptions(options);     // set the options
-			ibk.buildClassifier(data);
-			long classifierBuildEndTime = System.nanoTime();
-			double classifierBuildElapsedTime = (
-					(classifierBuildEndTime - classifierBuildStartTime) /
-					 1000000000.0);
-			WekaUtils.classifierBuildElapsedTime = classifierBuildElapsedTime;
-			System.out.println("+++++Classifier building ended in " +
-							   classifierBuildElapsedTime + " seconds");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		System.out.println(currentAlg + " lazy classifier finished.\n\n");
-		return ibk;
-	}
 	
 	//////////////// Generic classifier.
 	public static Classifier buildClassifier(Instances data,
@@ -315,15 +116,34 @@ public class WekaUtils {
 			options[0] = "-K";
 			options[1] = "5";
 		} else if (classifierName.equals("SVM")) {
-			classifier = new WLSVM();
+			WLSVM svmClassifier = new WLSVM();
+			try {
+				svmClassifier.setOptions(options);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			classifier = svmClassifier;
 		} else if (classifierName.equals("GeneticProgramming")) {
-			classifier = new GeneticProgramming();
+			GeneticProgramming gpClassifier = new GeneticProgramming();
+			options[0] = "";
+			try {
+				gpClassifier.setOptions(options);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			classifier = gpClassifier;
 		} else if (classifierName.equals("J48")) {
-			classifier = new J48();
+			J48 j48Classifier = new J48();
 			options[0] = "-C";
 			options[1] = "0.25";
 			options[2] = "-M";
 			options[3] = "2";
+			try {
+				j48Classifier.setOptions(options);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			classifier = j48Classifier;
 		} else {
 			System.out.println("Given classifier name " + classifierName +
 							   " can not be found");
@@ -351,7 +171,9 @@ public class WekaUtils {
 	
 	public static String evaluateCrossValidate(
 			Instances data, Classifier tree) {
-		System.out.println("\n\nEvaluate with cross validation...");
+		System.out.println(
+				"\n\nEvaluate with cross validation... Classifier: " +
+				currentAlg);
 		StringBuilder sb = new StringBuilder();
 		Evaluation eval = null;
 		try {
