@@ -5,19 +5,19 @@ import weka.core.Instances;
 
 public class WekaOperations {
 	private final String[] fileNames = {
-//			"dataset/adult.data_normalized.arff",
-//			"dataset/breast-cancer-wisconsin_normalized.arff",
-//			"dataset/car.data.arff",
+			"dataset/adult.data_normalized.arff",
+			"dataset/breast-cancer-wisconsin_normalized.arff",
+			"dataset/car.data.arff",
 			"dataset/iris.arff",
-//			"dataset/ext/contact-lenses.arff",
+			"dataset/ext/contact-lenses.arff",
 //			"dataset/ext/cpu.arff",
 //			"dataset/ext/cpu.with.vendor.arff",
-//			"dataset/ext/labor.arff",
-//			"dataset/ext/segment-challenge.arff",
-//			"dataset/ext/segment-test.arff",
-//			"dataset/ext/soybean.arff",
-//			"dataset/ext/weather.arff",
-//			"dataset/ext/weather.nominal.arff"
+			"dataset/ext/labor.arff",
+			"dataset/ext/segment-challenge.arff",
+			"dataset/ext/segment-test.arff",
+			"dataset/ext/soybean.arff",
+			"dataset/ext/weather.arff",
+			"dataset/ext/weather.nominal.arff"
 			};
 	
 	private final String[] algorithmNames = {
@@ -26,7 +26,7 @@ public class WekaOperations {
 //			"Id3",
 			"NaiveBayes",
 			"IBk",
-			"SVM",
+//			"SVM",
 			"GeneticProgramming",
 	};
 	
